@@ -13,8 +13,20 @@ const initialState = {
   errorMessage:null
 }
 
+interface ReducerState {
+  loading:boolean,
+  movies:[],
+  errorMessage:null
 
-const reducer = (state:any,action:any) => {
+}
+
+// type ReducerAction = 
+//   | { type:'SEARCH_MOVIES_REQUEST' | 'SEARCH_MOVIES_SUCCESS' | 'SEARCH_MOVIES_FAILURE'}
+//   | { error:string; payload:object};
+
+const reducer = (state:ReducerState,action:any) => {
+  console.log(typeof action);
+  
   switch(action.type) {
     case "SEARCH_MOVIES_REQUEST":
       return {
