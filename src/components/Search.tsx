@@ -1,7 +1,11 @@
 import React,{useState} from 'react'
 
-function Search(props) {
-    const [searchValue, setSearchValue] = useState<String>("");
+interface SearchProps {
+    search: (searchValue:string) => void;
+}
+
+function Search(props:SearchProps) {
+    const [searchValue, setSearchValue] = useState("");
 
     const handleSearchInputChanges = (event:React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value);

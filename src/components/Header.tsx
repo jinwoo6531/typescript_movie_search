@@ -4,7 +4,7 @@ interface HeaderProps {
     text : string
 }
 
-function Header({text:any}) {
+function Header({text}:HeaderProps) {
     return (
         <div>
             <header className="App-header">

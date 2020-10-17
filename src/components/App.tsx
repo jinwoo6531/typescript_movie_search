@@ -1,10 +1,10 @@
-import React,{useReducer,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import './App.css';
 import Header from "./Header";
 import Movie from "./Movie";
 import Search from "./Search";
 
-const API_KEY = '4a3b711b'; // CHANGE ME TO YOUR API KEY
+const API_KEY = '4a3b711b'; //본인 API KEY로 변환
 const MOVIE_API_URL = `https://www.omdbapi.com/?s=man&apikey=${API_KEY}`;
 
 const initialState = {
@@ -40,7 +40,7 @@ const reducer = (state:any,action:any) => {
   }
 }
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   useEffect(() => {
     fetch(MOVIE_API_URL)
@@ -60,7 +60,10 @@ function App() {
 
     fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`)
     .then(response => response.json())
-    .then(jsonResponse => {
+    .then(jsonResponse => {    
+      
+      console.log(11,jsonResponse);
+      
       if(jsonResponse.Response === "True") {
         dispatch({
           type:"SEARCH_MOVIES_SUCCESS",
@@ -77,8 +80,20 @@ function App() {
   const {movies, errorMessage, loading} = state;
   return (
     <div className="App">
-      <Header text="HOOKED"/>
+      <Header text="영화 검색"/>
       <Search search={search}/>
+      <p className="App-intro">Sharing a few of our favourite movies</p>
+      <div className="movies">
+        {loading && !errorMessage ? (
+          <span>loading... </span>
+        ) : errorMessage ? (
+          <div className="errorMessage">{errorMessage}</div>
+        ) : (
+          movies.map((movie:any,index:number) => (
+            <Movie key={`${index}-${movie.Title}`} movie={movie}/>
+          ))
+        )}
+      </div>
       
     </div>
   );
