@@ -17,7 +17,6 @@ interface ReducerState {
   loading:boolean,
   movies:[],
   errorMessage:null
-
 }
 
 const SEARCH_MOVIES_REQUEST = "search_movies_request";
