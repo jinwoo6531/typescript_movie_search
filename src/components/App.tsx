@@ -1,10 +1,10 @@
 import React,{useEffect} from 'react';
-import './App.css';
+import { API_KEY } from "./config";
 import Header from "./Header";
 import Movie from "./Movie";
 import Search from "./Search";
+import './App.css';
 
-const API_KEY = '4a3b711b'; //본인 API KEY로 변환
 const MOVIE_API_URL = `https://www.omdbapi.com/?s=man&apikey=${API_KEY}`;
 
 const initialState = {
