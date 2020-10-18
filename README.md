@@ -6,3 +6,5 @@ Test Case
 2. components -> config.ts 파일 생성
 3. export const API_KEY = "본인API 입력";
 4. npm run start
+
+https://jinwoo6531.github.io/typescript_movie_search/
