@@ -20,27 +20,27 @@ interface ReducerState {
 
 }
 
-// type ReducerAction = 
-//   | { type:'SEARCH_MOVIES_REQUEST' | 'SEARCH_MOVIES_SUCCESS' | 'SEARCH_MOVIES_FAILURE'}
-//   | { error:string; payload:object};
+const SEARCH_MOVIES_REQUEST = "search_movies_request";
+const SEARCH_MOVIES_SUCCESS = "search_movies_success";
+const SEARCH_MOVIES_FAILURE = "search_movies_failure";
+
 
 const reducer = (state:ReducerState,action:any) => {
-  console.log(typeof action);
   
   switch(action.type) {
-    case "SEARCH_MOVIES_REQUEST":
+    case SEARCH_MOVIES_REQUEST:
       return {
         ...state,
         loading: true,
         errorMessage: null
       };
-    case "SEARCH_MOVIES_SUCCESS":
+    case SEARCH_MOVIES_SUCCESS:
       return {
         ...state,
         loading: false,
         movies: action.payload || []
       };
-    case "SEARCH_MOVIES_FAILURE":
+    case SEARCH_MOVIES_FAILURE:
       return {
         ...state,
         loading:false,
@@ -59,7 +59,7 @@ function App() {
     .then(response => response.json())
     .then(jsonResponse => {
       dispatch({
-        type:"SEARCH_MOVIES_SUCCESS",
+        type:SEARCH_MOVIES_SUCCESS,
         payload: jsonResponse.Search
       });
     });
@@ -67,23 +67,21 @@ function App() {
 
   const search = (searchValue:string) => {
     dispatch({
-      type:"SEARCH_MOVIES_REQUEST"
+      type:SEARCH_MOVIES_REQUEST
     });
 
     fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=${API_KEY}`)
     .then(response => response.json())
     .then(jsonResponse => {    
-      
-      console.log(11,jsonResponse);
-      
+            
       if(jsonResponse.Response === "True") {
         dispatch({
-          type:"SEARCH_MOVIES_SUCCESS",
+          type:SEARCH_MOVIES_SUCCESS,
           payload: jsonResponse.Search
         });
       } else {
         dispatch({
-          type:"SEARCH_MOVIES_FAILURE",
+          type:SEARCH_MOVIES_FAILURE,
           error: jsonResponse.Error
         });
       }
