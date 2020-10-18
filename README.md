@@ -7,4 +7,4 @@ Test Case
 3. export const API_KEY = "본인API 입력";
 4. npm run start
 
-https://jinwoo6531.github.io/typescript_movie_search/
+https://jinwoo6531.github.io/typescript_movie_search_deploy/
